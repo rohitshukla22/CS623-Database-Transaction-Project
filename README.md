@@ -15,8 +15,9 @@ Implementation of ACID-compliant database transactions using PostgreSQL with rea
 - Interactive user interface
 
 ## Files
-- `transaction_interface.py` - Main transaction execution script
-- `CS623_Project_Concepts_Explained.md` - Concept explanations
+- `main.py` - Main transaction execution script
+- `README.md` - Concept explanations
+- `CS623.session.sql`
 
 ## How to Run
 ```bash
