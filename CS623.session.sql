@@ -1,0 +1,31 @@
+DROP TABLE IF EXISTS Stock CASCADE;
+DROP TABLE IF EXISTS Product CASCADE;
+DROP TABLE IF EXISTS Depot CASCADE;
+
+create table product (prod char(10), pname varchar(30), price decimal);
+create table depot (dep char(10), addr varchar(100), volume int);
+create table stock (prod char(10), dep char(10), quantity int);
+alter table product add constraint pk_product primary key (prod);
+alter table product add constraint ck_product_price check (price>0);
+alter table depot add constraint pk_depot primary key(dep);
+alter table stock add constraint pk_stock primary key(prod, dep);
+ALTER TABLE stock ADD CONSTRAINT fk_stock_product FOREIGN KEY (prod) REFERENCES product(prod) ON update cascade on delete cascade;
+ALTER TABLE stock ADD CONSTRAINT fk_stock_depot FOREIGN KEY (dep) REFERENCES depot(dep) ON update cascade on delete cascade;
+insert into product (prod, pname, price) values ('p1','tape', 2.5);
+insert into product (prod, pname, price) values ('p2', 'tv', 250);
+insert into product (prod, pname, price) values ('p3', 'vcr', 80);
+insert into depot (dep, addr, volume) values ('d1','New York',9000);
+insert into depot (dep, addr, volume) values ('d2','Syracuse',6000);
+insert into depot (dep, addr, volume) values ('d4','New York', 2000);
+insert into stock (prod, dep, quantity) values ('p1', 'd1', 1000);
+insert into stock (prod, dep, quantity) values ('p1', 'd2', -100);
+insert into stock (prod, dep, quantity) values ('p1', 'd4', 1200);
+insert into stock (prod, dep, quantity) values ('p3', 'd1', 3000);
+insert into stock (prod, dep, quantity) values ('p3', 'd4', 2000);
+insert into stock (prod, dep, quantity) values ('p2', 'd4', 1500);
+insert into stock (prod, dep, quantity) values ('p2', 'd1', -400);
+insert into stock (prod, dep, quantity) values ('p2', 'd2', 2000);
+
+SELECT * FROM product;
+SELECT  * FROM depot;
+SELECT * FROM stock;
